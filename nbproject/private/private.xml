@@ -3,14 +3,30 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/web/cart.jsp</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/web/detail.jsp</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/web/home.jsp</file>
-            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/src/java/controller/ProductController.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/web/includes/adminHeader.jsp</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/web/addProduct.jsp</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/src/java/controller/UserController.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/src/java/dao/PaymentDao.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/src/java/controller/HomeController.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/src/java/entity/OrderItems.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/src/java/dao/OrdersDao.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/src/java/dao/OrderItemsDao.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/src/java/dao/CompanyDao.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/src/java/dao/CartDao.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/web/editProduct.jsp</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/web/register.jsp</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/src/java/controller/ProductController.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/src/java/dao/UsersDao.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/web/login.jsp</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/src/java/controller/AdminController.java</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/web/admin.jsp</file>
-            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/src/java/entity/Product.java</file>
-            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/src/java/dao/ProductDao.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/src/java/controller/CartController.java</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/web/includes/header.jsp</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/WebFinal_Fly/src/java/entity/Cart.java</file>
         </group>
     </open-files>
 </project-private>

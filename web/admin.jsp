@@ -119,13 +119,13 @@
                                     <!-- set up a link for each student -->
                                     <c:url var="tempLink" value="${request.getContextPath}/admin/users/edit">
 
-                                        <c:param name="productId" value="${item.id}"></c:param>
+                                        <c:param name="userId" value="${item.id}"></c:param>
 
                                     </c:url>
                                     <!-- set up a link to delete a student -->
                                     <c:url var="deleteLink" value="${request.getContextPath}/users/delete">
 
-                                        <c:param name="productId" value="${item.id}"
+                                        <c:param name="userId" value="${item.id}"
                                                  ></c:param>
 
                                     </c:url>
@@ -141,7 +141,89 @@
                                         <td> ${item.phone}</td>
                                         <td> ${item.gender}</td>
                                         <td> ${item.role ? "admin": "user"}</td>
-    
+
+                                        <td>
+                                            <div class="d-flex">
+                                                <a class="btn btn-info" href="${tempLink}">Update</a>
+                                                <p class="mx-1"></p>
+                                                <a class="btn btn-danger "href="${deleteLink}" onClick="if (!(confirm('sure?')))
+                                                            return false">Delete</a> 
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                </c:forEach>
+
+
+                            </tbody>
+                        </table>
+                    </c:if>
+                    <c:if test="${companyList!=null}">
+
+
+                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">New Company</button>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form action="<%=request.getContextPath()%>/admin/company/add" method="POST">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">New Company</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Name Company</label>
+                                                <input type="text" class="form-control" id="recipient-name" name="name">
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <table class="table caption-top">
+                            <caption>List of Users</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Name</th>
+
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <c:forEach var="item" items="${companyList}">
+                                    <!-- set up a link for each student -->
+                                    <c:url var="tempLink" value="${request.getContextPath}/admin/company/edit">
+
+                                        <c:param name="companyId" value="${item.id}"></c:param>
+
+                                    </c:url>
+                                    <!-- set up a link to delete a student -->
+                                    <c:url var="deleteLink" value="${request.getContextPath}/admin/company/delete">
+
+                                        <c:param name="companyId" value="${item.id}"
+                                                 ></c:param>
+
+                                    </c:url>
+
+                                    <tr>
+
+                                        <td> ${item.id}</td>
+                                        <td> ${item.name}</td>
+
                                         <td>
                                             <div class="d-flex">
                                                 <a class="btn btn-info" href="${tempLink}">Update</a>

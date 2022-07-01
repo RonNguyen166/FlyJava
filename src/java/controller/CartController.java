@@ -64,23 +64,41 @@ public class CartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("userLogin");
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/users/login");
+        }
         try {
             String path = request.getPathInfo();
             if (path == null) {
                 path = "/";
             }
-            if ("/".equals(path)) {
-                HttpSession session = request.getSession();
-                User user = (User) session.getAttribute("useId");
-                List<Cart> list = cartDao.getCartsUser(user);
-                int total = cartDao.total(Integer.toString(user.getId()));
-                request.setAttribute("cartList", list);
-                request.setAttribute("total", total);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("list.jsp");
-                dispatcher.forward(request, response);
-            } else if ("/update-quantity".equals(path)) {
-                updateQuantity(request, response);
+            switch(path){
+                case"/":
+                    List<Payment> payList = new PaymentDao().getPayments();
+                    System.out.println("s"+ payList);
+                    request.setAttribute("payList", payList);
+                    List<Cart> list = cartDao.getCartsUser(user);
+                    int total = cartDao.total(Integer.toString(user.getId()));
+                    request.setAttribute("cartList", list);
+                    request.setAttribute("total", total);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("cart.jsp");
+                    dispatcher.forward(request, response);
+                    break;
+                case "/update-quantity":
+                    updateQuantity(request, response);
+                    break;
+                case "/add":
+                    addCart(request, response,user);
+                    break;
+                case "/delete":
+                    deleteCart(request, response);
+                    break;
+                default:
+                    break;
             }
+       
         } catch (Exception ex) {
             Logger.getLogger(CartController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -104,30 +122,32 @@ public class CartController extends HttpServlet {
                 path = "/";
             }
             switch (path) {
-                case "/":
-                    addCart(request, response);
-                    break;
                 case "/checkout":
                     checkout(request, response);
                     break;
                 default:
-                    response.sendRedirect("/cart");
+                    response.sendRedirect(request.getContextPath()+ "/cart");
                     break;
-
             }
         } catch (Exception ex) {
             Logger.getLogger(CartController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private void addCart(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("useId");
+    private void deleteCart(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String cartId = request.getParameter("cartId");
+        cartDao.deleteCart(cartId);
+        response.sendRedirect(request.getContextPath() + "/cart");
+    }
+
+    private void addCart(HttpServletRequest request, HttpServletResponse response, User user) throws Exception {
+      
         String productId = request.getParameter("productId");
-        String quantity = request.getParameter("quantity");
+//        String quantity = request.getParameter("quantity");
+        int quantity = 1;
         Product product = new ProductDao().getProdut(productId);
-        cartDao.addCart(product, user, Integer.parseInt(quantity));
-        response.sendRedirect("/cart");
+        cartDao.addCart(product, user, quantity);
+        response.sendRedirect(request.getContextPath() + "/cart");
     }
 
     private void updateQuantity(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -140,27 +160,28 @@ public class CartController extends HttpServlet {
 
     private void checkout(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("userAuth");
+        User user = (User) session.getAttribute("userLogin");
         String paymentId = request.getParameter("paymentId");
         Payment payment = new PaymentDao().getPayment(paymentId);
-        int total = cartDao.total( Integer.toString(user.getId()));
-        
+        int total = cartDao.total(Integer.toString(user.getId()));
+
         Orders order = new Orders(user, payment, total);
         order = new OrdersDao().addOrder(order);
-        
+
         List<Cart> ls = cartDao.getCartsUser(user);
-        for(Cart cart : ls){
+        for (Cart cart : ls) {
             Product product = new ProductDao().getProdut(Integer.toString(cart.getProduct().getId()));
-            if(cart.getProduct().getId() == product.getId()){
+            if (cart.getProduct().getId() == product.getId()) {
                 OrderItems orderItem = new OrderItems(product, order, cart.getQuantity(), product.getPrice());
                 new OrderItemsDao().addOrderItem(orderItem);
             }
-            
+
         }
-        response.sendRedirect("/cart");
-        
-        
+        cartDao.deleteCartUser(user);
+        response.sendRedirect(request.getContextPath() + "/home");
+
     }
+
     @Override
     public String getServletInfo() {
         return "Short description";

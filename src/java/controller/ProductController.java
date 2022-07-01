@@ -52,6 +52,7 @@ public class ProductController extends HttpServlet {
                 case "/":
                     getProducts(request, response);
                     break;
+         
                 case "/detail":
                     productDetail(request, response);
                     break;
@@ -119,22 +120,6 @@ public class ProductController extends HttpServlet {
         System.out.println(product);
         productDao.addProduct(product);
         response.sendRedirect(request.getContextPath()+ "/admin");
-    }
-
-    private void editProduct(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-        String productId = request.getParameter("productId");
-
-        Product product = productDao.getProdut(productId);
-        List<Company> list = new CompanyDao().getCompanies();
-        request.setAttribute("companyList", list);
-        request.setAttribute("productEdit", product);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("../../editProduct.jsp");
-        
-        dispatcher.forward(request, response);
-     
-
     }
 
     private void productDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {

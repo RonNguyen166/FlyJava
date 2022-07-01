@@ -78,6 +78,12 @@ public class AdminController extends HttpServlet {
             case "/users":
                 getUsers(request, response);
                 break;
+            case "/company":
+                getCompanies(request, response);
+                break;
+            case "/company/delete":
+                deleteCompany(request, response);
+                break;
             case "/orders":
                 break;
             case "/products/add":
@@ -109,7 +115,12 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String path = request.getPathInfo();
+        if("/company/add".equals(path)){
+            addCompany(request, response);
+        }else if("/company/update".equals(path)){
+            updateCompany(request,response);
+        }
     }
 
     /**
@@ -130,6 +141,35 @@ public class AdminController extends HttpServlet {
         request.setAttribute("userList", list);
         RequestDispatcher dispatcher = request.getRequestDispatcher("../admin.jsp");
         dispatcher.forward(request, response);
+    }
+    
+    private void getCompanies(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Company> list = new CompanyDao().getCompanies();
+        request.setAttribute("companyList", list);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("../admin.jsp");
+        dispatcher.forward(request, response);
+    }
+    private void addCompany(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String name = request.getParameter("name");
+        new CompanyDao().createCompany(name);
+        response.sendRedirect(request.getContextPath()+ "/admin/company");
+    }
+    private void deleteCompany(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String companyId = request.getParameter("companyId");
+        new CompanyDao().deleteCompany(companyId);
+        response.sendRedirect(request.getContextPath()+ "/admin/company");
+    }
+    
+     private void updateCompany(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String companyId = request.getParameter("companyId");
+        String name = request.getParameter("name");
+        Company p = new Company(Integer.parseInt(companyId), name);
+        new CompanyDao().updateCompany(p);
+        response.sendRedirect(request.getContextPath()+ "/admin/company");
     }
 //    private void getOrders(HttpServletRequest request, HttpServletResponse response)
 //            throws ServletException, IOException {

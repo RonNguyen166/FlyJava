@@ -28,6 +28,10 @@
         <servlet-name>AdminController</servlet-name>
         <servlet-class>controller.AdminController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CompanyController</servlet-name>
+        <servlet-class>controller.CompanyController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/users/*</url-pattern>
@@ -50,6 +54,10 @@
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
         <url-pattern>/admin/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompanyController</servlet-name>
+        <url-pattern>/company</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

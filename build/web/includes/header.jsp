@@ -54,7 +54,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo" style="color: white; font-weight: 700; font-size: 35px; line-height: 2;">
+                        <a href="<%= request.getContextPath() %>/" class="logo" style="color: white; font-weight: 700; font-size: 35px; line-height: 2;">
                            FLYTEAM
                         </a>
                     </div>
@@ -92,12 +92,12 @@
 
                         <!-- Cart -->
                         <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                            <a class="text-white" href="<%= request.getContextPath()%>/cart">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Your Cart</span>
                                 <div class="qty">3</div>
                             </a>
-                            <div class="cart-dropdown">
+<!--                            <div class="cart-dropdown">
                                 <div class="cart-list">
                                     <div class="product-widget">
                                         <div class="product-img">
@@ -126,21 +126,14 @@
                                     <h5>SUBTOTAL: $2940.00</h5>
                                 </div>
                                 <div class="cart-btns">
-                                    <a href="#">View Cart</a>
+                                    <a href="<%=request.getContextPath() %>/cart">View Cart</a>
                                     <a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                         <!-- /Cart -->
 
-                        <!-- Menu Toogle -->
-                        <div class="menu-toggle">
-                            <a href="#">
-                                <i class="fa fa-bars"></i>
-                                <span>Menu</span>
-                            </a>
-                        </div>
-                        <!-- /Menu Toogle -->
+
                     </div>
                 </div>
                 <!-- /ACCOUNT -->

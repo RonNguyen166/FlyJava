@@ -178,7 +178,7 @@ public class CartDao {
 
     public int total(String idd) {
         try {
-            String sql = "select SUM(p.product_price * c.quantity) as total from Cart c, Product p where c.productId = p.productId and c.userId = ?";
+            String sql = "select SUM(p.productPrice * c.quantity) as total from Cart c, Product p where c.productId = p.productId and c.userId = ?";
             conn = db.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, idd);
@@ -216,6 +216,18 @@ public class CartDao {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, quantity);
             ps.setString(2, productId);
+            ps.execute();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CartDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void deleteCartUser(User user){
+        try {
+            String sql = "Delete Cart where userId = ?";
+            conn = db.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, user.getId());
+          
             ps.execute();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CartDao.class.getName()).log(Level.SEVERE, null, ex);

@@ -19,6 +19,8 @@
                     <li><a href="<%= request.getContextPath()%>/" class="nav-link px-2 text-secondary">Home</a></li>
                     <li><a href="<%= request.getContextPath()%>/admin" class="nav-link px-2 text-white">Products</a></li>
                     <li><a href="<%= request.getContextPath()%>/admin/users" class="nav-link px-2 text-white">Users</a></li>
+                    <li><a href="<%= request.getContextPath()%>/admin/company" class="nav-link px-2 text-white">Company</a></li>
+
                     <li><a href="<%= request.getContextPath()%>/admin/orders" class="nav-link px-2 text-white">Orders</a></li>
 
                 </ul>
