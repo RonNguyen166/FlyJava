@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-        <title>Electro - HTML Ecommerce Template</title>
+        <title>FlyTeam - JavaWeb</title>
 
         <!-- Google font -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -149,7 +149,8 @@
                                 <div id="tab1" class="tab-pane active">
                                     <div class="products-slick" data-nav="#slick-nav-1">
                                         <c:forEach var="item" items="${productList}">
-                                            <c:url var="tempLink" value="products/detail">
+                                            
+                                            <c:url var="tempLink" value= "${request.getContextPath()}/products/detail">
                                                 <c:param name="productId" value="${item.id}"></c:param>
                                             </c:url> 
 

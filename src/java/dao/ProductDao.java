@@ -121,27 +121,26 @@ public class ProductDao {
     }
 
     public boolean updateProduct(Product product) {
-        String sql = "Update Product\n"
-                    + "SET productName = ?, product_price = ?, description=?, quantity=?, color=?, size=?, image=?, discount=?, companyId=?\n"
-                    + "WHERE productId =? ";
+        String sql = "Update Product SET productName =? , productPrice =? , description=?, detail=? , amount=?, color=?, size=?, image=?, discount=?, companyId=? WHERE productId =?";
         try {
             
             conn = db.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, product.getName());
             ps.setInt(2, product.getPrice());
-            ps.setString(4, product.getDescription());
+            ps.setString(3, product.getDescription());
+            ps.setString(4, product.getDetail());
             ps.setInt(5, product.getAmount());
             ps.setString(6, product.getColor());
             ps.setInt(7, product.getSize());
-            ps.setInt(8, product.getDiscount());
-            ps.setString(9, product.getImage());
+            ps.setString(8, product.getImage());
+            ps.setInt(9, product.getDiscount());
             ps.setInt(10, product.getCompany().getId());            
             ps.setInt(11, product.getId());
-            
+            boolean result =  ps.execute();
             db.close(conn, ps, rs);
-
-            return ps.execute();
+            return result;
+            
 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -154,8 +153,9 @@ public class ProductDao {
         try {
             conn = db.getConnection();
             ps = conn.prepareStatement(sql);
+            boolean result = ps.execute();
             db.close(conn, ps, rs);
-            return ps.execute();
+            return result;
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
         }

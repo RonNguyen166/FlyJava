@@ -2188,3 +2188,17 @@ textarea.input {
     margin-top: 10px;
   }
 }
+.acc{
+    display: inline-block;
+}
+.acc button{
+    background:  transparent;
+    border: none;
+}
+.acc .dropdown-menu{
+    background: #1E1F29;
+}
+.acc .dropdown-menu li {
+    display: block;
+    margin-right: 0;
+}

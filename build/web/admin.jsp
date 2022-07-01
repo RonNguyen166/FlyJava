@@ -14,114 +14,151 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     </head>
     <body>
-        <div class="header">
-
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
-                <div class="container py-3">
-                    <a class="navbar-brand mb-0 h1" href="#">MANAGER</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link " href="home">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link " href="#">Products</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link">Users</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link">Orders</a>
-                            </li>
-                        </ul>
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                            <li class="nav-item">
-                                <a class="nav-link">Hello ${userLogin.name}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link">logout</a>
-                            </li>
-                        </form>
-                        
-                    </div>
-                </div>
-
-
-            </nav>
-        </div>
-        <div class="container">
+        <%@include file="./includes/adminHeader.jsp" %>
+        <div class="container-fluid px-5">
             <br>
-            <a href="products/add"  class="btn btn-primary">Add Product</a>
+            <a href="<%= request.getContextPath()%>/admin/products/add"  class="btn btn-primary">Add Product</a>
 
             <div class = "card mt-3">
                 <div class="card-body">
-                    <table class="table caption-top">
-                        <caption>List of Product</caption>
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Description</th>                                
-                                <th scope="col">Detail</th>
+                    <c:if test="${productList!=null}">
+                        <table class="table caption-top">
+                            <caption>List of Product</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Company</th>
 
-                                <th scope="col">Amount</th>
-                                <th scope="col">Discount</th>
-                                <th scope="col">Color</th>
-                                <th scope="col">Size</th>
-                                <th scope="col">Image</th>
-                                <th scope="col">Company</th>
-                                <th scope="col" >Action</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Description</th>                                
+                                    <th scope="col">Detail</th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="item" items="${productList}">
-                            <!-- set up a link for each student -->
-                            <c:url var="tempLink" value="StudentController">
-                                <c:param name="command" value="LOAD"></c:param>
-                                <c:param name="studentId" value="${item.id}"></c:param>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Discount</th>
+                                    <th scope="col">Color</th>
+                                    <th scope="col">Size</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col" >Action</th>
 
-                            </c:url>
-                            <!-- set up a link to delete a student -->
-                            <c:url var="deleteLink" value="StudentController">
-                                <c:param name="command" value="DELETE"
-                                         ></c:param>
-                                <c:param name="studentId" value="${item.id}"
-                                         ></c:param>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                            </c:url>
+                                <c:forEach var="item" items="${productList}">
+                                    <!-- set up a link for each student -->
+                                    <c:url var="tempLink" value="${request.getContextPath}/admin/products/edit">
 
-                            <tr>
-                                <td> ${item.name}</td>
-                                <td> ${item.price}</td>
-                                <td> ${item.description}</td>                                
-                                <td> ${item.detail}</td>
+                                        <c:param name="productId" value="${item.id}"></c:param>
 
-                                <td> ${item.detail}</td>
-                                <td> ${item.amount}</td>
-                                <td> ${item.discount}</td>
-                                <td> ${item.color}</td>
-                                <td> ${item.size}</td>
-                                <td> ${item.image}</td>                                
-                                <td> ${item.company}</td>
+                                    </c:url>
+                                    <!-- set up a link to delete a student -->
+                                    <c:url var="deleteLink" value="${request.getContextPath}/products/delete">
+
+                                        <c:param name="productId" value="${item.id}"
+                                                 ></c:param>
+
+                                    </c:url>
+
+                                    <tr>
+
+                                        <td> ${item.id}</td>
+                                        <td><img src="${item.image}" width="80"/></td>  
+                                        <td> ${item.name}</td>
+                                        <td> ${item.price}</td>
+                                        <td> ${item.description}</td>                                
+                                        <td> ${item.detail}</td>
+                                        <td> ${item.amount}</td>
+                                        <td> ${item.discount}</td>
+                                        <td> ${item.color}</td>
+                                        <td> ${item.size}</td>
+
+                                        <td> ${item.company.name}</td>
 
 
-                                <td> <a class="btn btn-info" href="${tempLink}">Update</a>
-                                    <a  class="btn btn-danger"href="${deleteLink}" onClick="if (!(confirm('sure?')))return false">Delete</a>
+                                        <td>
+                                            <div class="d-flex">
+                                                <a class="btn btn-info" href="${tempLink}">Update</a>
+                                                <p class="mx-1"></p>
+                                                <a class="btn btn-danger "href="${deleteLink}" onClick="if (!(confirm('sure?')))
+                                                            return false">Delete</a> 
+                                            </div>
+                                        </td>
 
-                            </tr>
+                                    </tr>
 
-                        </c:forEach>
-                        </tbody>
-                    </table>
+                                </c:forEach>
+
+
+                            </tbody>
+                        </table>
+                    </c:if>
+                    <c:if test="${userList!=null}">
+                        <table class="table caption-top">
+                            <caption>List of Users</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Photo</th>
+
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Dob</th>                                
+                                    <th scope="col">Address</th>
+
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">Gender</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col" >Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <c:forEach var="item" items="${userList}">
+                                    <!-- set up a link for each student -->
+                                    <c:url var="tempLink" value="${request.getContextPath}/admin/users/edit">
+
+                                        <c:param name="productId" value="${item.id}"></c:param>
+
+                                    </c:url>
+                                    <!-- set up a link to delete a student -->
+                                    <c:url var="deleteLink" value="${request.getContextPath}/users/delete">
+
+                                        <c:param name="productId" value="${item.id}"
+                                                 ></c:param>
+
+                                    </c:url>
+
+                                    <tr>
+
+                                        <td> ${item.id}</td>
+                                        <td><img src="${item.photo}" width="60"/></td>  
+                                        <td> ${item.name}</td>
+                                        <td> ${item.email}</td>
+                                        <td> ${item.dob}</td>                                
+                                        <td> ${item.address}</td>
+                                        <td> ${item.phone}</td>
+                                        <td> ${item.gender}</td>
+                                        <td> ${item.role ? "admin": "user"}</td>
+    
+                                        <td>
+                                            <div class="d-flex">
+                                                <a class="btn btn-info" href="${tempLink}">Update</a>
+                                                <p class="mx-1"></p>
+                                                <a class="btn btn-danger "href="${deleteLink}" onClick="if (!(confirm('sure?')))
+                                                            return false">Delete</a> 
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                </c:forEach>
+
+
+                            </tbody>
+                        </table>
+                    </c:if>
                 </div>
             </div>
 

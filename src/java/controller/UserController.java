@@ -67,21 +67,6 @@ public class UserController extends HttpServlet {
                 default:
                     break;
             }
-//            if(path == null){
-//                List<User> list = usersDao.getUsers();
-//            // add these students to the object request
-//            request.setAttribute("userslist", list);
-//            // send to the JSP page (view)
-//            RequestDispatcher dispatcher = request.getRequestDispatcher("list.jsp");
-//            dispatcher.forward(request, response);
-//            }else if("/logout".equals(path)){
-//                logout(request,response);
-//            }else if("/login".equals(path){  
-//                request.getRequestDispatcher("../login.jsp").forward(request, response);
-//
-//            }else if("/register".equals(path)){
-//                request.getRequestDispatcher("register.jsp").forward(request, response);
-//            }
             
         } catch (ServletException | IOException ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);

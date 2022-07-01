@@ -11,19 +11,33 @@
                 <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="<%=request.getContextPath()%>/admin"><i class="fa fa-user-o"></i>Manager</a></li>
                 <c:if test="${userLogin.role == true}">
-                     <li><a href="admin"><i class="fa fa-user-o"></i>Manager</a></li>
+                     <li><a href="<%=request.getContextPath()%>/admin"><i class="fa fa-user-o"></i>Manager</a></li>
                 </c:if>
+                     
                 <c:if test="${userLogin == null}">
-                     <li><a href="users/login"><i class="fa fa-user-o"></i>Login</a></li>
-                    <li><a href="users/register"><i class="fa fa-user-o"></i>Register</a></li>
+                     <li><a href="<%=request.getContextPath()%>/users/login"><i class="fa fa-user-o"></i>Login</a></li>
+                    <li><a href="<%=request.getContextPath()%>/users/register"><i class="fa fa-user-o"></i>Register</a></li>
                 </c:if>
                  <c:if test="${userLogin !=null}">
-                      <li><a href="#"><i class="fa fa-user-o"></i>Hello ${userLogin.name},</a></li>
-
-                     <li><a href="users/logout"><i class="fa fa-lock"></i>logout</a></li>
-                    
+                     
+                      
+                     
+                    <div class="dropdown acc">
+                        <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                          <li><a href="#"><i class="fa fa-user-o"></i>Hello ${userLogin.name},</a></li>
+                          <img src="${userLogin.photo}" alt="alt" width="25"/>
+                          <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                          <li><a href="#">Action</a></li>
+                          <li><a href="#">Another action</a></li>
+                          <li><a href="#">Something else here</a></li>
+                     
+                          <li><a href="#">Separated link</a></li>
+                          <li><a href="users/logout">logout</a></li>
+                        </ul>
+                      </div>
                 </c:if>       
                     
             </ul>
@@ -40,8 +54,8 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
-                            <img src="./img/logo.png" alt="">
+                        <a href="#" class="logo" style="color: white; font-weight: 700; font-size: 35px; line-height: 2;">
+                           FLYTEAM
                         </a>
                     </div>
                 </div>

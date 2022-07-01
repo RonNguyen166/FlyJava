@@ -2,7 +2,7 @@
 <html lang="en">
  
 <head>
-    <title>Login 07</title>
+    <title>FlyTeam</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  
@@ -28,7 +28,8 @@
                         <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
                             <div class="text w-100">
                                 <h2>Welcome to register</h2>
-                                <a href="#" class="btn btn-white btn-outline-white">Register</a>
+                                 <p>Already have an account.</p>
+                                <a href="login" class="btn btn-white btn-outline-white">Login</a>
                             </div>
                         </div>
                         <div class="login-wrap p-4 p-lg-5">

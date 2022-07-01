@@ -44,6 +44,9 @@ public class UsersDao {
                 user.setPhone(rs.getString("phone"));
                 user.setDob(rs.getDate("dob"));
                 user.setPhoto(rs.getString("photo"));
+                user.setGender(rs.getBoolean("gender"));
+                user.setRole(rs.getBoolean("roles"));
+  
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, ex);

@@ -59,10 +59,13 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+      
         List<Product> list = new ProductDao().getProducts();
         request.setAttribute("productList", list);
         RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
-        dispatcher.forward(request, response);
+        dispatcher.forward(request, response); 
+        
+        
     }
 
     /**

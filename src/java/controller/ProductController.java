@@ -44,7 +44,7 @@ public class ProductController extends HttpServlet {
             throws ServletException, IOException {
         try {
             String path = request.getPathInfo();
-            System.out.println(path);
+
             if (path == null) {
                 path = "/";
             }
@@ -52,16 +52,11 @@ public class ProductController extends HttpServlet {
                 case "/":
                     getProducts(request, response);
                     break;
-                case "/add":
-                    List<Company> list = new CompanyDao().getCompanies();
-                    request.setAttribute("companyList", list);
-                    request.getRequestDispatcher("../addProduct.jsp").forward(request, response);
-                    break;
-                case "/edit":
-                    editProduct(request, response);
-                    break;
                 case "/detail":
                     productDetail(request, response);
+                    break;
+                case "/delete":
+                    deleteProduct(request, response);
                     break;
                 default:
                     break;
@@ -80,12 +75,11 @@ public class ProductController extends HttpServlet {
             throws ServletException, IOException {
         try {
             String path = request.getPathInfo();
-            if ("/add".equals(path)) {
+            System.out.println("pat" + path);
+            if ("/addProduct".equals(path)) {
                 addProduct(request, response);
-            } else if ("/update".equals(path)) {
+            } else if ("/updateProduct".equals(path)) {
                 updateProduct(request, response);
-            }else if("delete".equals(path)){
-                deleteProduct(request, response);
             }
         } catch (Exception ex) {
             Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
@@ -132,10 +126,11 @@ public class ProductController extends HttpServlet {
         String productId = request.getParameter("productId");
 
         Product product = productDao.getProdut(productId);
-
+        List<Company> list = new CompanyDao().getCompanies();
+        request.setAttribute("companyList", list);
         request.setAttribute("productEdit", product);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("../edit.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("../../editProduct.jsp");
         
         dispatcher.forward(request, response);
      
@@ -158,7 +153,10 @@ public class ProductController extends HttpServlet {
         request.setAttribute("productDetail", product);
         request.setAttribute("productList", list);
         RequestDispatcher dispatcher = request.getRequestDispatcher("../detail.jsp");
+                
+
         dispatcher.forward(request, response);
+        
         
     }
 
@@ -181,7 +179,8 @@ public class ProductController extends HttpServlet {
         Product product = new Product(id, name, Integer.parseInt(price), description, detail, Integer.parseInt(amount), Integer.parseInt(discount), color, Integer.parseInt(size), image, comp);
 
         productDao.updateProduct(product);
-        getProducts(request, response);
+        
+        response.sendRedirect( request.getContextPath()+"/admin");
 
     }
 
@@ -191,7 +190,7 @@ public class ProductController extends HttpServlet {
         // delete student from the database
         productDao.deleteProduct(productId);
         // send them back to the "list student" pages
-        getProducts(request, response);
+        response.sendRedirect( request.getContextPath()+"/admin");
 
     }
 }

@@ -4,8 +4,14 @@
  */
 package controller;
 
+import dao.CompanyDao;
+import dao.OrderItemsDao;
 import dao.ProductDao;
+import dao.UsersDao;
+import entity.Company;
+import entity.OrderItems;
 import entity.Product;
+import entity.User;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +20,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-
 
 /**
  *
@@ -39,7 +44,7 @@ public class AdminController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminController</title>");            
+            out.println("<title>Servlet AdminController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet AdminController at " + request.getContextPath() + "</h1>");
@@ -60,10 +65,37 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Product> list = new ProductDao().getProducts();
-        request.setAttribute("productList", list);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("admin.jsp");
-        dispatcher.forward(request, response);
+        String path = request.getPathInfo();
+        if (path == null) {
+            path = "/";
+        }
+        List<Company> listC = new CompanyDao().getCompanies();
+
+        switch (path) {
+            case "/products":
+                getProducts(request, response);
+                break;
+            case "/users":
+                getUsers(request, response);
+                break;
+            case "/orders":
+                break;
+            case "/products/add":
+                request.setAttribute("companyList", listC);
+                request.getRequestDispatcher("../../addProduct.jsp").forward(request, response);
+                break;
+            case "/products/edit":
+                String productId = request.getParameter("productId");
+                Product product = new ProductDao().getProdut(productId);
+                request.setAttribute("productEdit", product);
+                request.setAttribute("companyList", listC);
+                request.getRequestDispatcher("../../editProduct.jsp").forward(request, response);
+                break;
+            default:
+                getProducts(request, response);
+
+        }
+
     }
 
     /**
@@ -85,6 +117,27 @@ public class AdminController extends HttpServlet {
      *
      * @return a String containing servlet description
      */
+    private void getProducts(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Product> listP = new ProductDao().getProducts();
+        request.setAttribute("productList", listP);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin.jsp");
+        dispatcher.forward(request, response);
+    }
+    private void getUsers(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<User> list = new UsersDao().getUsers();
+        request.setAttribute("userList", list);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("../admin.jsp");
+        dispatcher.forward(request, response);
+    }
+//    private void getOrders(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        List<OrderItems> list = new OrderItemsDao().getOrderItems();
+//        request.setAttribute("list", list);
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("admin.jsp");
+//        dispatcher.forward(request, response);
+//    }
     @Override
     public String getServletInfo() {
         return "Short description";

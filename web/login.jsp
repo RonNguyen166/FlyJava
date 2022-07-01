@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Login 07</title>
+    <title>FlyTeam</title>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -37,7 +37,7 @@
                 <div class="text w-100">
                   <h2>Welcome to login</h2>
                   <p>Don't have an account?</p>
-                  <a href="#" class="btn btn-white btn-outline-white"
+                  <a href="register" class="btn btn-white btn-outline-white"
                     >Sign Up</a
                   >
                 </div>
